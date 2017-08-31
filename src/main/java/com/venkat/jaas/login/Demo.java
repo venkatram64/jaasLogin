@@ -9,16 +9,14 @@ import javax.security.auth.login.LoginException;
 /**
  * Created by venkatram.veerareddy on 8/31/2017.
  */
-
 //http://mschrag.blogspot.in/2008/03/jaas-kerberos-auth.html
-public class Demo1 {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Demo1.class);
+public class Demo {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Demo.class);
 
 
     public static void main(String[] args){
         try{
-            System.setProperty("java.security.auth.login.config", Demo1.class.getResource("/login.config").toExternalForm());
+            System.setProperty("java.security.auth.login.config", Demo.class.getResource("/my-login.config").toExternalForm());
             LoginContext loginContext = new LoginContext("MyLoginContext");
             loginContext.login();
             LOGGER.info("Authentication is successful.");
