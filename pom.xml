@@ -50,6 +50,100 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- Assembly -->
+			<!--<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+
+				<configuration>
+					<ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>make-output</id>
+						<configuration>
+							<descriptors>
+								<descriptor>assembly-output.xml</descriptor>
+							</descriptors>
+							<outputDirectory>.</outputDirectory>
+							<finalName>output</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>make-deploy</id>
+						<configuration>
+							<descriptors>
+								<descriptor>assembly.xml</descriptor>
+							</descriptors>
+							<outputDirectory>output</outputDirectory>
+							<finalName>${artifactId}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
+
+			<!-- Docker Image Build -->
+			<!--<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>tag-image</id>
+						<phase>install</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<image>${docker.image.name}</image>
+							<newName>${docker.image.registry}/${docker.image.name}:${docker.image.tag}</newName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>push-image</id>
+						<phase>install</phase>
+						<goals>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<imageName>${docker.image.registry}/${docker.image.name}:${docker.image.tag}</imageName>
+							<registryUrl>${docker.image.registry}</registryUrl>
+							<useConfigFile>true</useConfigFile>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>${docker.image.name}</imageName>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>.</targetPath>
+							<directory>${project.basedir}/output</directory>
+							<include>${project.build.finalName}.tar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>-->
 		</plugins>
 	</build>
 
