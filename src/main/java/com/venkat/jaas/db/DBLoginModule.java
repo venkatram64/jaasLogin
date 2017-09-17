@@ -1,5 +1,7 @@
 package com.venkat.jaas.db;
 
+import com.venkat.jaas.custom.PasswordPrincipal;
+import com.venkat.jaas.custom.UserPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

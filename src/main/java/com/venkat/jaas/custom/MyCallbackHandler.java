@@ -1,6 +1,5 @@
-package com.venkat.jaas.db;
+package com.venkat.jaas.custom;
 
-import com.venkat.jaas.custom.PasswordPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,17 +9,12 @@ import java.io.IOException;
 /**
  * Created by venkatram.veerareddy on 9/1/2017.
  */
-public class DBCallbackHandler implements CallbackHandler{
+public class MyCallbackHandler implements CallbackHandler{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DBCallbackHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyCallbackHandler.class);
 
     private String username = null;
     private String password = null;
-
-    public DBCallbackHandler(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {

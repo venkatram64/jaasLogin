@@ -1,0 +1,3 @@
+grant Principal com.sun.security.auth.NTUserPrincipal "Venkatram" {
+    permission com.venkat.jaas.permission.MyPermission "test";
+};
