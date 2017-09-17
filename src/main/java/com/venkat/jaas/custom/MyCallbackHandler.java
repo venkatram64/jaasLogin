@@ -16,6 +16,11 @@ public class MyCallbackHandler implements CallbackHandler{
     private String username = null;
     private String password = null;
 
+    public MyCallbackHandler(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 

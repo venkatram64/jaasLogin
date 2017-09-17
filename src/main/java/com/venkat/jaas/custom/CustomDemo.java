@@ -22,7 +22,7 @@ public class CustomDemo {
         try {
             System.setProperty("java.security.auth.login.config",
                     CustomDemo.class.getResource("/custom-login.config").toExternalForm());
-            LoginContext loginContext = new LoginContext("MyLoginContext", new MyCallbackHandler());
+            LoginContext loginContext = new LoginContext("MyLoginContext", new MyCallbackHandler("user1","password"));
             loginContext.login();
             LOGGER.info("Authentication is successful.");
             //show user info
