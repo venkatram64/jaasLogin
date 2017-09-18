@@ -29,7 +29,7 @@ public class MyCallbackHandler implements CallbackHandler{
             if(callbacks[i] instanceof NameCallback){
                 NameCallback nameCallback = (NameCallback) callbacks[i];
                 nameCallback.setName(username);
-            }else if(callbacks[i] instanceof PasswordPrincipal){
+            }else if(callbacks[i] instanceof PasswordCallback){
                 PasswordCallback passwordCallback = (PasswordCallback) callbacks[i];
                 passwordCallback.setPassword(password.toCharArray());
             }else{

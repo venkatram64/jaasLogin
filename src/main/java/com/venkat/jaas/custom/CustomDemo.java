@@ -17,6 +17,7 @@ import java.security.PrivilegedAction;
  */
 public class CustomDemo {
 
+        //http://www.avajava.com/tutorials/lessons/how-do-i-create-a-login-module.html
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomDemo.class);
     public static void main(String[] args) {
         try {
@@ -40,23 +41,7 @@ public class CustomDemo {
             for(Object privCred: subject.getPrivateCredentials()){
                 LOGGER.info("\t" + privCred.toString());
             }
-            //Action with access-control
-            PrivilegedAction action = () -> {
-                Permission permission = new MyPermission("test");
-                AccessController.checkPermission(permission);
-                LOGGER.info("Permission granted.");
-                return null;
-            };
-           /* PrivilegedAction action = new PrivilegedAction() {
-                @Override
-                public Object run() {
-                    Permission permission = new MyPermission("test");
-                    AccessController.checkPermission(permission);
-                    LOGGER.info("Permission granted.");
-                    return null;
-                }
-            };*/
-            subject.doAsPrivileged(subject, action, null);
+
         } catch (LoginException ex) {
             LOGGER.info("Authentication failed.");
         }

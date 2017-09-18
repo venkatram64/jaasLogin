@@ -34,8 +34,9 @@ public class CustomLoginModule implements LoginModule{
     private UserPrincipal userPrincipal;
     private PasswordPrincipal passwordPrincipal;
 
-
-
+    public CustomLoginModule(){
+        LOGGER.info("Login Module - constructor called.");
+    }
 
     @Override
     public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
@@ -43,25 +44,30 @@ public class CustomLoginModule implements LoginModule{
         this.callbackHandler = callbackHandler;
         this.sharedState = sharedState;
         this.options = options;
+
+        this.succeeded = false;
+        LOGGER.info("Login Module - initialize called.");
     }
 
     @Override
     public boolean login() throws LoginException {
+        LOGGER.info("Login Module - login called.");
         if(callbackHandler == null){
             throw new LoginException("Error: No CallbackHandler available ");
         }
         Callback[] callbacks = new Callback[2];
-        callbacks[0] = new NameCallback("username");
-        callbacks[1] = new PasswordCallback("password", false);
+        callbacks[0] = new NameCallback("username:");
+        callbacks[1] = new PasswordCallback("password:", false);
         try{
             callbackHandler.handle(callbacks);
             username = ((NameCallback)callbacks[0]).getName();
             password = ((PasswordCallback)callbacks[1]).getPassword();
+            String pwd = new String(password);
             if(username == null || password == null){
                 LOGGER.error("Callback handler does not return login data properly");
                 throw new LoginException("Callback handler does not return login data properly");
             }
-            if(username.equals("user1") && password.equals("password")){
+            if(username.equals("user1") && pwd.equals("password")){
                 succeeded = true;
                 return succeeded;
             }
@@ -75,6 +81,7 @@ public class CustomLoginModule implements LoginModule{
 
     @Override
     public boolean commit() throws LoginException {
+        LOGGER.info("Login Module - commit called.");
         if(succeeded == false){
             return succeeded;
         }else{
@@ -96,7 +103,7 @@ public class CustomLoginModule implements LoginModule{
 
     @Override
     public boolean abort() throws LoginException {
-
+        LOGGER.info("Login Module - abort called.");
         if(succeeded == false){
             return succeeded;
         }else if(succeeded == true && commitSucceeded == false){
@@ -114,6 +121,7 @@ public class CustomLoginModule implements LoginModule{
 
     @Override
     public boolean logout() throws LoginException {
+        LOGGER.info("Login Module - logout called.");
         subject.getPrincipals().remove(userPrincipal);
         succeeded = false;
         succeeded = commitSucceeded;
